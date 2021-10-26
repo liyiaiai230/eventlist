@@ -13,14 +13,14 @@
 <script lang="js">
 export default {
   name: 'MyLtem',
-  props:['todo','checkTodo','remove'],
+  props:['todo',],
   methods:{
     handleCheck(id) {
-      this.checkTodo(id)
+      this.$eventBus.$emit('checkTodo',id)
     },
     handleDelete(id) {
      if (confirm('确认删除')){
-       this.remove(id)
+       this.$eventBus.$emit('remove',id)
      }
     }
   },

@@ -1,8 +1,7 @@
 <template>
   <div class="todo-header">
 
-    <input type="text" placeholder="请输入你的任务名称" v-model="title" @keyup.enter="add"/>
-    <button @click="add">确认</button>
+    <input type="text" placeholder="请输入你的任务名称 按回车确认" v-model="title" @keyup.enter="add"/>
     </div>
 </template>
 
@@ -10,7 +9,6 @@
 import {nanoid} from 'nanoid'
 export default {
   name: 'MyHeader',
-  props:['addTodo'],
   data(){
     return{
       title: ''
@@ -20,8 +18,8 @@ export default {
     add(){
       if (!this.title.trim())return alert("请输入任务！")
       const todoObj = {id:nanoid(), title: this.title,done:false }
-      this.addTodo(todoObj)
       this.title= ''
+      this.$emit('addTodo',todoObj)
     }
   }
 };

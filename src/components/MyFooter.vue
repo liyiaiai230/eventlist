@@ -14,7 +14,7 @@
 <script lang="js">
 export default {
   name: 'MyFooter',
-  props:['todos','checkAllTodo','clearAllTodo'],
+  props:['todos',],
   computed:{
     total(){
       return this.todos.length
@@ -27,13 +27,13 @@ export default {
         return this.doneTotal === this.total && this.total > 0
     },
       set(value){
-        this.checkAllTodo(value)
+        this.$emit('checkAllTodo',value)
         }
     }
   },
   methods: {
     clearAll: function () {
-      this.clearAllTodo()
+      this.$emit(`clearAllTodo`)
 
     }
 

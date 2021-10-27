@@ -28,26 +28,37 @@ export default {
     }
   },
   methods:{
+    //添加一个todo
     addTodo(todoObj){
       this.todos.unshift(todoObj)
     },
+    //勾选or取消一个todo
     checkTodo(id){
       this.todos.forEach((todo)=>{
         if (todo.id === id ) todo.done = !todo.done
       })
     },
+    //更新一个todo
+    updateTodo(id,title){
+      this.todos.forEach((todo)=>{
+        if (todo.id === id ) todo.title = title
+      })
+    },
+    //删除一个todo
     remove(id){
      this.todos= this.todos.filter((todo)=>{
         return todo.id !== id
       })
 
     },
+   //全选or取消全部
     clearAllTodo(){
       this.todos = this.todos.filter((todo)=>{
         return ! todo.done
 
       })
     },
+    //清除已完成的todo
     checkAllTodo(done) {
        this.todos.forEach((todo)=> {
         todo.done = done
@@ -64,11 +75,13 @@ export default {
   },
   mounted() {
     this.$eventBus.$on('checkTodo',this.checkTodo)
-    this.$eventBus.$on(' remove', this.remove)
+    this.$eventBus.$on('updateTodo',this.updateTodo)
+    this.$eventBus.$on('remove', this.remove)
   },
   beforeDestroy() {
     this.$eventBus.$off('checkTodo')
     this.$eventBus.$off('remove')
+    this.$eventBus.$off('updateTodo')
   }
 }
 </script>
@@ -94,6 +107,13 @@ body {
   color: #ffffff;
   background-color:#da4f49 ;
   border: 1px solid #bd362f;
+
+}
+.btn-edit {
+  color: #ffffff;
+  background-color: #d0837d;
+  border: 1px solid #878585;
+  margin-right: 10px;
 }
 .btn-danger:hover {
   color: #ffffff;

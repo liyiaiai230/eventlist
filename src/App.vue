@@ -129,7 +129,6 @@ body {
 .todo-container .todo-wrap{
   padding: 10px;
   border: 1px solid #dddddd;
-  border-right:5px ;
 
 }
 </style>

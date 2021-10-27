@@ -4,8 +4,7 @@
       <label>
         <input type="checkbox" :checked="todo.done" @change="handleCheck(todo.id)"/>
         <span v-show="!todo.isEdit">{{todo.title}}</span>
-        <input type="text"
-        v-show="todo.isEdit" :value="todo.title" @blur="handleBlur(todo,$event)">
+        <input type="text" v-show="todo.isEdit" :value="todo.title" @blur="handleBlur(todo,$event) " ref='inputTitle'>
       </label>
       <button class="btn btn-danger" @click="handleDelete(todo.id)">删除</button>
       <button v-show="!todo.isEdit" class="btn btn-edit" @click="handleEdit(todo)">修改</button>
@@ -35,6 +34,9 @@ export default {
       }else{
         this.$set(todo,'isEdit',true)
       }
+      this.$nextTick(function (){
+        this.$refs.inputTitle.focus()
+      })
 
     },
     //失去焦点回调
@@ -74,9 +76,7 @@ li button {
 li:before{
   content: initial;
 }
-li:last-child {
-  border-bottom: none;
-}
+
 li:hover{
   background-color: #dddddd;
 }
